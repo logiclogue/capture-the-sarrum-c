@@ -10,11 +10,11 @@ EXECUTABLE=$(DIRBUILD)/main
 
 all: $(SOURCES) $(EXECUTABLE)
 
-$(EXECUTABLE);
+$(EXECUTABLE):
 	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
 
 $(SOURCES):
-	$(CC) $(CFLAGS) $<
+	$(CC) $(CFLAGS) $@
 	mv *.o $(DIRSRC)
 
 clean:
