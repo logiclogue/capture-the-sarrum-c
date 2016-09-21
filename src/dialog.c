@@ -1,5 +1,7 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <ctype.h>
+#include "dialog.h"
 
 
 static int yes_or_no(void);
@@ -25,6 +27,44 @@ int dialog_play_again(void)
     printf("Do you want to play again (enter Y for Yes)? ");
 
     return yes_or_no();
+}
+
+/*
+ * Gets the start coords.
+ */
+int *dialog_get_piece_coords(void)
+{
+    char *message = "Enter coordinates of square containing piece to "
+                    "move (file first):";
+
+    return dialog_get_coords(message);
+}
+
+int *dialog_get_move_coords(void)
+{
+    char *message = "Enter coordinates of square to move piece to (file "
+                    "first):";
+    
+    return dialog_get_coords(message);
+}
+
+/*
+ * Gets an array of the coords in format: [file, rank].
+ */
+int *dialog_get_coords(char *message)
+{
+    int file;
+    int rank;
+    int *coords = malloc(2 * sizeof(int));
+
+    printf("%s ", message);
+    fflush(stdin);
+    scanf(" %d , %d", &file, &rank);
+
+    coords[0] = file;
+    coords[1] = rank;
+
+    return coords;
 }
 
 
