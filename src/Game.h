@@ -1,6 +1,3 @@
-int Game_board_size;
-
-
 typedef struct GameTag {
     char **board;
     int game_over;

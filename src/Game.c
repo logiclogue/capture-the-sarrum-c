@@ -1,14 +1,20 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include "Game.h"
-
-
-int Game_board_size;
 
 
 Game Game_main(int board_size)
 {
     Game self;
-    char *board[board_size][board_size];
+    char **board = malloc(board_size);
+
+    for (int x = 0; x < board_size; x++) {
+        board[x] = malloc(board_size * sizeof(char));
+
+        for (int y = 0; y < board_size; y++) {
+            board[x][y] = '#';
+        }
+    }
 
     self.board = board;
 

@@ -4,7 +4,6 @@
 
 int main()
 {
-    Game_board_size = 8;
     Game game = Game_main(8);
     game.board[7][7] = 'J';
     
