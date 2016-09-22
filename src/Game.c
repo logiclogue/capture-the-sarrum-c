@@ -33,8 +33,5 @@ int Game_make_move(Game *game)
     int finish_rank = game->finish_square[1];
     Piece *piece = board[start_file][start_rank];
 
-    printf("%d, %d\n", start_file, start_rank);
-    printf("%s\n", board[start_file][start_rank]);
-    
     return 0;
 }
