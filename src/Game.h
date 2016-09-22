@@ -1,12 +1,10 @@
+typedef struct PieceTag Piece;
+
 typedef struct GameTag {
-    char **board;
+    Piece ***board; // 2d array
     int game_over;
-    int start_square;
-    int finish_square;
-    int start_rank;
-    int start_file;
-    int finish_rank;
-    int finish_file;
+    int *start_square; // array
+    int *finish_square; // array
     int move_is_legal;
     char play_again;
     char sample_game;
@@ -14,4 +12,5 @@ typedef struct GameTag {
 } Game;
 
 
-Game Game_main(int);
+Game *Game_main(int);
+int Game_make_move(Game *);
