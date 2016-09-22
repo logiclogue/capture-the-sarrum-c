@@ -1,4 +1,5 @@
 typedef struct GameTag Game;
+typedef struct PieceTag Piece;
 
 typedef struct PieceTag {
     char type;
