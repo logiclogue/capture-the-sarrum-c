@@ -1,6 +1,11 @@
 #ifndef _BOARD_H_
 #define _BOARD_H_
 
+#include "Piece.h"
+
+
+typedef struct PieceTag Piece;
+
 typedef Piece ***Board;
 
 

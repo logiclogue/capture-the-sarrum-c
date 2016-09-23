@@ -1,6 +1,9 @@
 #ifndef _GAME_H_
 #define _GAME_H_
 
+#include "Piece.h"
+
+
 typedef struct PieceTag Piece;
 
 typedef struct GameTag {

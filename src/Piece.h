@@ -2,7 +2,11 @@ typedef struct GameTag Game;
 #ifndef _PIECE_H_
 #define _PIECE_H_
 
+#include "Game.h"
+
+
 typedef struct PieceTag Piece;
+typedef struct GameTag Game;
 
 typedef struct PieceTag {
     char type;
