@@ -1,4 +1,7 @@
 typedef struct GameTag Game;
+#ifndef _PIECE_H_
+#define _PIECE_H_
+
 typedef struct PieceTag Piece;
 
 typedef struct PieceTag {
@@ -15,3 +18,5 @@ int Piece_is_gisgigir_move_legal(Piece *, Game *);
 int Piece_is_nabu_move_legal(Piece *, Game *);
 int Piece_is_marzaz_pani_move_legal(Piece *, Game *);
 int Piece_is_etlu_move_legal(Piece *, Game *);
+
+#endif

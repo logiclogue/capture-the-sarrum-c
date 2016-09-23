@@ -1,3 +1,6 @@
+#ifndef _GAME_H_
+#define _GAME_H_
+
 typedef struct PieceTag Piece;
 
 typedef struct GameTag {
@@ -14,3 +17,5 @@ typedef struct GameTag {
 
 Game *Game_main(void);
 int Game_make_move(Game *);
+
+#endif
