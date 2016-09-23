@@ -2,22 +2,13 @@
 #include <stdlib.h>
 #include "Game.h"
 #include "Piece.h"
+#include "Board.h"
 
 
 Game *Game_main(int board_size)
 {
     Game *self = malloc(sizeof(Game));
-    Piece ***board = malloc(board_size * sizeof(Piece **));
-
-    for (int x = 0; x < board_size; x++) {
-        board[x] = malloc(board_size * sizeof(Piece *));
-
-        for (int y = 0; y < board_size; y++) {
-            board[x][y] = malloc(sizeof(Piece));
-            board[x][y]->type = 'M';
-            board[x][y]->colour = 'W';
-        }
-    }
+    Board board = Board_main(board_size);
 
     self->board = board;
 
