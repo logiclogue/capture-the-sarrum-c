@@ -30,7 +30,7 @@ Board Board_main(void)
 /*
  * Draws the board to console.
  */
-void Board_draw(Board *self)
+void Board_draw(Board self)
 {
     int line_size = 4 + (3 * BOARD_SIZE);
     char *line = malloc(line_size * sizeof(char));
@@ -40,4 +40,6 @@ void Board_draw(Board *self)
     for (int i = 0; i < BOARD_SIZE; i++) {
         sprintf(line, "  %d", i);
     }
+
+    printf("%s\n", line);
 }

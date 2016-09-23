@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "Game.h"
 #include "Piece.h"
+#include "Board.h"
 #include "dialog.h"
 
 
@@ -20,6 +21,7 @@ int main()
     printf("%d, %d\n", game->finish_square[0], game->finish_square[1]);
 
     Game_make_move(game);
+    Board_draw(game->board);
     
     piece->is_move_legal(piece, game);
 
