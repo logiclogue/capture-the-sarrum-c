@@ -12,5 +12,5 @@ typedef struct GameTag {
 } Game;
 
 
-Game *Game_main(int);
+Game *Game_main(void);
 int Game_make_move(Game *);

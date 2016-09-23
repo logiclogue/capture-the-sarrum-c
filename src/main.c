@@ -6,7 +6,7 @@
 
 int main()
 {
-    Game *game = Game_main(8);
+    Game *game = Game_main();
     Piece *piece = Piece_main('M', 'P');
     game->board[7][7] = piece;
     

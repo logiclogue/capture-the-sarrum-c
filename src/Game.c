@@ -5,10 +5,10 @@
 #include "Board.h"
 
 
-Game *Game_main(int board_size)
+Game *Game_main(void)
 {
     Game *self = malloc(sizeof(Game));
-    Board board = Board_main(board_size);
+    Board board = Board_main();
 
     self->board = board;
 
