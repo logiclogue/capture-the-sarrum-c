@@ -13,11 +13,11 @@ EXECUTABLE=$(DIRBUILD)/main
 all: $(SOURCES) $(EXECUTABLE)
 
 $(EXECUTABLE):
+	mv *.o $(DIRSRC)
 	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
 
 $(SOURCES):
 	$(CC) $(CFLAGS) $@
-	mv *.o $(DIRSRC)
 
 clean:
 	rm $(OBJECTS) $(EXECUTABLE)
