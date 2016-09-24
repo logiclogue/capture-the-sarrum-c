@@ -10,6 +10,7 @@ int main(void)
     Game *game = Game_main();
     game->board[4][6] = Piece_main('M', 'W');
     game->board[5][5] = Piece_main('R', 'B');
+    game->board[6][5] = Piece_main('S', 'B');
     
     Board_draw(game->board);
 

@@ -75,7 +75,15 @@ int Piece_is_redum_move_legal(Piece *self, Game *game)
 
 int Piece_is_sarrum_move_legal(Piece *self, Game *game)
 {
-    return 0;
+    int start_file = game->start_square[0];
+    int start_rank = game->start_square[1];
+    int finish_file = game->finish_square[0];
+    int finish_rank = game->finish_square[1];
+
+    int squares_vertical = abs(finish_file - start_file);
+    int squares_horizontal = abs(finish_rank - start_rank);
+
+    return squares_vertical <= 1 && squares_horizontal <= 1;
 }
 
 int Piece_is_gisgigir_move_legal(Piece *self, Game *game)
