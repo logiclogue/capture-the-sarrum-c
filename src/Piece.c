@@ -1,9 +1,10 @@
-#include "stdlib.h"
+#include <stdlib.h>
 #include "Game.h"
 #include "Piece.h"
 
 
 static int return_false(Piece *, Game *);
+static int is_empty_square(Piece *);
 
 
 Piece *Piece_main(char type, char colour)
@@ -42,6 +43,38 @@ Piece *Piece_main(char type, char colour)
 
 int Piece_is_redum_move_legal(Piece *self, Game *game)
 {
+    char colour = self->colour;
+    char opponent_colour;
+    int start_file = game->start_square[0];
+    int start_rank = game->start_square[1];
+    int finish_file = game->finish_square[0];
+    int finish_rank = game->finish_square[1];
+    int forward_square = 1;
+    int does_move_sideways = abs(finish_file - start_file) == 1;
+    int does_move_forward;
+    int is_same_file = finish_file == start_file;
+    Piece *capture_piece = game->board[finish_file][finish_rank];
+    int is_empty_capture_piece = is_empty_square(capture_piece);
+
+    if (colour == 'W') {
+        forward_square = -1;
+        opponent_colour = 'B';
+    } else {
+        opponent_colour = 'W';
+    }
+
+    does_move_forward = finish_rank == start_rank + forward_square;
+
+    if (!does_move_forward) {
+        return 0;
+    }
+
+    if (is_same_file && is_empty_capture_piece) {
+        return 1;
+    } else if (does_move_sideways && capture_piece->colour == opponent_colour) {
+        return 1;
+    }
+
     return 0;
 }
 
@@ -70,7 +103,13 @@ int Piece_is_etlu_move_legal(Piece *self, Game *game)
     return 0;
 }
 
+
 static int return_false(Piece *self, Game *game)
 {
     return 0;
+}
+
+static int is_empty_square(Piece *piece)
+{
+    return piece->type == ' ' && piece->colour == ' ';
 }

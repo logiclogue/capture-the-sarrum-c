@@ -8,7 +8,8 @@
 int main(void)
 {
     Game *game = Game_main();
-    game->board[7][7] = Piece_main('M', 'W');
+    game->board[4][6] = Piece_main('M', 'W');
+    game->board[5][5] = Piece_main('R', 'B');
     
     Board_draw(game->board);
 
@@ -20,7 +21,7 @@ int main(void)
     printf("%d, %d\n", game->start_square[0], game->start_square[1]);
     printf("%d, %d\n", game->finish_square[0], game->finish_square[1]);
 
-    game->whose_turn = 'W';
+    game->whose_turn = 'B';
 
     Game_make_move(game);
     Board_draw(game->board);
