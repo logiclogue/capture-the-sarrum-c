@@ -8,9 +8,10 @@
 #define BOARD_LINE_SIZE 4 + (3 * BOARD_SIZE)
 
 
-static void draw_header(void);
-static void draw_line(void);
+static char *draw_header(void);
+static char *draw_line(void);
 static void draw_pieces(Board, int);
+static char *allocate_line(void);
 
 
 /*
@@ -38,15 +39,24 @@ Board Board_main(void)
  */
 void Board_draw(Board self)
 {
-    draw_header();
-    draw_line();
-    draw_pieces(self, 0);
+    char *line = draw_line();
+    char *header = draw_header();
+
+    for (int i = 0; i < BOARD_SIZE; i++) {
+        printf("%s", line);
+        draw_pieces(self, i);
+    }
+
+    printf("%s\n%s", line, header);
+
+    free(line);
+    free(header);
 }
 
 
-static void draw_header(void)
+static char *draw_header(void)
 {
-    char *line = malloc(BOARD_LINE_SIZE * sizeof(char));
+    char *line = allocate_line();
 
     sprintf(line, "%s", "   ");
 
@@ -54,13 +64,14 @@ static void draw_header(void)
         sprintf(line, "%s  %d", line, i);
     }
 
-    printf("%s\n", line);
-    free(line);
+    sprintf(line, "%s\n", line);
+
+    return line;
 }
 
-static void draw_line(void)
+static char *draw_line(void)
 {
-    char *line = malloc(BOARD_LINE_SIZE * sizeof(char));
+    char *line = allocate_line();
 
     sprintf(line, "%s", "   ");
 
@@ -68,22 +79,28 @@ static void draw_line(void)
         sprintf(line, "%s___", line);
     }
 
-    printf("%s\n", line);
-    free(line);
+    sprintf(line, "%s_\n", line);
+
+    return line;
 }
 
 static void draw_pieces(Board self, int rank)
 {
-    char *line = malloc(BOARD_LINE_SIZE * sizeof(char));
+    char *line = allocate_line();
 
-    sprintf(line, "%d  |", rank);
+    sprintf(line, "%d  ", rank);
 
     for (int i = 0; i < BOARD_SIZE; i++) {
         Piece *piece = self[i][rank];
 
-        sprintf(line, "%s%c%c|", line, piece->type, piece->colour);
+        sprintf(line, "%s|%c%c", line, piece->type, piece->colour);
     }
 
-    printf("%s\n", line);
+    printf("%s|\n", line);
     free(line);
+}
+
+static char *allocate_line(void)
+{
+    return malloc(BOARD_LINE_SIZE * sizeof(char));
 }
