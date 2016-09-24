@@ -5,6 +5,12 @@
 
 
 #define BOARD_SIZE 8
+#define BOARD_LINE_SIZE 4 + (3 * BOARD_SIZE)
+
+
+static void draw_header(void);
+static void draw_line(void);
+static void draw_pieces(Board, int);
 
 
 /*
@@ -32,14 +38,52 @@ Board Board_main(void)
  */
 void Board_draw(Board self)
 {
-    int line_size = 4 + (3 * BOARD_SIZE);
-    char *line = malloc(line_size * sizeof(char));
+    draw_header();
+    draw_line();
+    draw_pieces(self, 0);
+}
 
-    sprintf(line, "%s", "    ");
+
+static void draw_header(void)
+{
+    char *line = malloc(BOARD_LINE_SIZE * sizeof(char));
+
+    sprintf(line, "%s", "   ");
 
     for (int i = 0; i < BOARD_SIZE; i++) {
-        sprintf(line, "  %d", i);
+        sprintf(line, "%s  %d", line, i);
     }
 
     printf("%s\n", line);
+    free(line);
+}
+
+static void draw_line(void)
+{
+    char *line = malloc(BOARD_LINE_SIZE * sizeof(char));
+
+    sprintf(line, "%s", "   ");
+
+    for (int i = 0; i < BOARD_SIZE; i++) {
+        sprintf(line, "%s___", line);
+    }
+
+    printf("%s\n", line);
+    free(line);
+}
+
+static void draw_pieces(Board self, int rank)
+{
+    char *line = malloc(BOARD_LINE_SIZE * sizeof(char));
+
+    sprintf(line, "%d  |", rank);
+
+    for (int i = 0; i < BOARD_SIZE; i++) {
+        Piece *piece = self[i][rank];
+
+        sprintf(line, "%s%c%c|", line, piece->type, piece->colour);
+    }
+
+    printf("%s\n", line);
+    free(line);
 }
