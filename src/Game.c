@@ -51,10 +51,12 @@ static void make_move(Game *game)
 {
     int start_file = game->start_square[0];
     int start_rank = game->start_square[1];
+    int finish_file = game->finish_square[0];
+    int finish_rank = game->finish_square[1];
 
     Piece *start_square = game->board[start_file][start_rank];
 
-    game->board[game->finish_square[0]][game->finish_square[1]] = start_square;
+    game->board[finish_file][finish_rank] = start_square;
     game->board[start_file][start_rank] = Piece_main(' ', ' ');
 }
 
