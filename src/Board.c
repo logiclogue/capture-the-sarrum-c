@@ -26,8 +26,8 @@ Board Board_main(void)
 
         for (int y = 0; y < BOARD_SIZE; y++) {
             board[x][y] = malloc(sizeof(Piece));
-            board[x][y]->type = 'M';
-            board[x][y]->colour = 'W';
+            board[x][y]->type = ' ';
+            board[x][y]->colour = ' ';
         }
     }
 
@@ -47,7 +47,7 @@ void Board_draw(Board self)
         draw_pieces(self, i);
     }
 
-    printf("%s\n%s", line, header);
+    printf("%s\n%s\n\n", line, header);
 
     free(line);
     free(header);
@@ -61,7 +61,7 @@ static char *draw_header(void)
     sprintf(line, "%s", "   ");
 
     for (int i = 0; i < BOARD_SIZE; i++) {
-        sprintf(line, "%s  %d", line, i);
+        sprintf(line, "%s  %d", line, i + 1);
     }
 
     sprintf(line, "%s\n", line);
@@ -88,7 +88,7 @@ static void draw_pieces(Board self, int rank)
 {
     char *line = allocate_line();
 
-    sprintf(line, "%d  ", rank);
+    sprintf(line, "%d  ", rank + 1);
 
     for (int i = 0; i < BOARD_SIZE; i++) {
         Piece *piece = self[i][rank];
