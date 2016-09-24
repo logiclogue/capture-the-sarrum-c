@@ -52,9 +52,11 @@ int Piece_is_redum_move_legal(Piece *self, Game *game)
     int forward_square = 1;
     int does_move_sideways = abs(finish_file - start_file) == 1;
     int does_move_forward;
+    int does_move_diagonal;
     int is_same_file = finish_file == start_file;
     Piece *capture_piece = game->board[finish_file][finish_rank];
     int is_empty_capture_piece = is_empty_square(capture_piece);
+    int is_capture_piece_opponent;
 
     if (colour == 'W') {
         forward_square = -1;
@@ -64,18 +66,11 @@ int Piece_is_redum_move_legal(Piece *self, Game *game)
     }
 
     does_move_forward = finish_rank == start_rank + forward_square;
+    is_capture_piece_opponent = capture_piece->colour == opponent_colour;
+    does_move_diagonal = does_move_forward && does_move_sideways;
 
-    if (!does_move_forward) {
-        return 0;
-    }
-
-    if (is_same_file && is_empty_capture_piece) {
-        return 1;
-    } else if (does_move_sideways && capture_piece->colour == opponent_colour) {
-        return 1;
-    }
-
-    return 0;
+    return (does_move_forward && is_same_file && is_empty_capture_piece) ||
+           (does_move_diagonal && is_capture_piece_opponent);
 }
 
 int Piece_is_sarrum_move_legal(Piece *self, Game *game)
