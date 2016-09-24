@@ -3,6 +3,9 @@
 #include "Piece.h"
 
 
+static int return_false(Piece *, Game *);
+
+
 Piece *Piece_main(char type, char colour)
 {
     Piece *self = malloc(sizeof(Piece));
@@ -28,6 +31,9 @@ Piece *Piece_main(char type, char colour)
         break;
     case 'E':
         self->is_move_legal = &Piece_is_etlu_move_legal;
+        break;
+    default:
+        self->is_move_legal = &return_false;
         break;
     }
     
@@ -56,10 +62,15 @@ int Piece_is_nabu_move_legal(Piece *self, Game *game)
 
 int Piece_is_marzaz_pani_move_legal(Piece *self, Game *game)
 {
-    return 0;
+    return 1;
 }
 
 int Piece_is_etlu_move_legal(Piece *self, Game *game)
+{
+    return 0;
+}
+
+static int return_false(Piece *self, Game *game)
 {
     return 0;
 }

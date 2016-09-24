@@ -5,13 +5,13 @@
 #include "dialog.h"
 
 
-int main()
+int main(void)
 {
     Game *game = Game_main();
-    Piece *piece = Piece_main('M', 'P');
-    game->board[7][7] = piece;
+    game->board[7][7] = Piece_main('M', 'W');
     
-    printf("This: %c\n", game->board[7][7]->type);
+    Board_draw(game->board);
+
     dialog_sample_game();
     dialog_play_again();
     game->start_square = dialog_get_piece_coords();
@@ -20,10 +20,11 @@ int main()
     printf("%d, %d\n", game->start_square[0], game->start_square[1]);
     printf("%d, %d\n", game->finish_square[0], game->finish_square[1]);
 
+    game->whose_turn = 'W';
+
     Game_make_move(game);
     Board_draw(game->board);
-    
-    piece->is_move_legal(piece, game);
+
 
     return 0;
 }

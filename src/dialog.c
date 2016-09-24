@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include "dialog.h"
+#include "Board.h"
 
 
 static int yes_or_no(void);
@@ -35,15 +36,15 @@ int dialog_play_again(void)
 int *dialog_get_piece_coords(void)
 {
     char *message = "Enter coordinates of square containing piece to "
-                    "move (file first):";
+                    "move (file, rank):";
 
     return dialog_get_coords(message);
 }
 
 int *dialog_get_move_coords(void)
 {
-    char *message = "Enter coordinates of square to move piece to (file "
-                    "first):";
+    char *message = "Enter coordinates of square to move piece to (file, "
+                    "rank):";
     
     return dialog_get_coords(message);
 }
@@ -53,16 +54,27 @@ int *dialog_get_move_coords(void)
  */
 int *dialog_get_coords(char *message)
 {
-    int file;
-    int rank;
+    int valid_coords = 0; // boolean
     int *coords = malloc(2 * sizeof(int));
 
-    printf("%s ", message);
-    fflush(stdin);
-    scanf(" %d , %d", &file, &rank);
+    while (!valid_coords) {
+        int file;
+        int rank;
 
-    coords[0] = file;
-    coords[1] = rank;
+        printf("%s ", message);
+        fflush(stdin);
+        scanf(" %d , %d", &file, &rank);
+
+        coords[0] = file;
+        coords[1] = rank;
+
+        if (file > 0 && rank > 0 && file <= BOARD_SIZE && rank <= BOARD_SIZE) {
+            valid_coords = 1;
+        }
+    }
+
+    coords[0] -= 1;
+    coords[1] -= 1;
 
     return coords;
 }
