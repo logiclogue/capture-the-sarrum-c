@@ -7,6 +7,7 @@
 
 static int is_off(int);
 static void make_move(Game *);
+static int is_legal_move(Game *);
 
 
 Game *Game_main(void)
@@ -20,6 +21,18 @@ Game *Game_main(void)
 }
 
 int Game_make_move(Game *game)
+{
+    int is_move = is_legal_move(game);
+
+    if (is_move) {
+        make_move(game);
+    }
+
+    return is_move;
+}
+
+
+static int is_legal_move(Game *game)
 {
     Piece ***board = game->board;
     int start_file = game->start_square[0];
@@ -36,16 +49,9 @@ int Game_make_move(Game *game)
     int is_on_board = !is_file_off && !is_rank_off;
     int is_your_move = piece->colour == game->whose_turn;
     int is_legal = piece->is_move_legal(piece, game);
-    int is_move = is_different_square && is_on_board &&
-                  is_your_move && is_legal;
 
-    if (is_move) {
-        make_move(game);
-    }
-
-    return is_move;
+    return is_different_square && is_on_board && is_your_move && is_legal;
 }
-
 
 static void make_move(Game *game)
 {
