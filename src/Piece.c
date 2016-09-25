@@ -170,7 +170,14 @@ int Piece_is_marzaz_pani_move_legal(Piece *self, Game *game)
 
 int Piece_is_etlu_move_legal(Piece *self, Game *game)
 {
-    return 0;
+    int file_difference = game->finish_square[0] - game->start_square[0];
+    int rank_difference = game->finish_square[1] - game->start_square[1];
+
+    int abs_file_difference = abs(file_difference);
+    int abs_rank_difference = abs(rank_difference);
+
+    return (abs_file_difference == 2 && abs_rank_difference == 0) ||
+           (abs_file_difference == 0 && abs_rank_difference == 2);
 }
 
 
