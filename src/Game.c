@@ -40,6 +40,7 @@ static int is_legal_move(Game *game)
     int finish_file = game->finish_square[0];
     int finish_rank = game->finish_square[1];
     Piece *piece = board[start_file][start_rank];
+    Piece *capture_piece = board[finish_file][finish_rank];
 
     int is_same_file = start_file == finish_file;
     int is_same_rank = start_rank == finish_rank;
@@ -49,8 +50,10 @@ static int is_legal_move(Game *game)
     int is_on_board = !is_file_off && !is_rank_off;
     int is_your_move = piece->colour == game->whose_turn;
     int is_legal = piece->is_move_legal(piece, game);
+    int is_capture_piece_yours = capture_piece->colour == game->whose_turn;
 
-    return is_different_square && is_on_board && is_your_move && is_legal;
+    return is_different_square && is_on_board && is_your_move && is_legal &&
+           !is_capture_piece_yours;
 }
 
 static void make_move(Game *game)
