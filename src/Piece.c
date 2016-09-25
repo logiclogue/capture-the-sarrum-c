@@ -88,7 +88,64 @@ int Piece_is_sarrum_move_legal(Piece *self, Game *game)
 
 int Piece_is_gisgigir_move_legal(Piece *self, Game *game)
 {
-    return 0;
+    int start_file = game->start_square[0];
+    int start_rank = game->start_square[1];
+    int finish_file = game->finish_square[0];
+    int finish_rank = game->finish_square[1];
+
+    int is_move_legal = 0;
+    int count = 0;
+    int rank_difference = finish_rank - start_rank;
+    int file_difference = finish_file - start_file;
+    Piece *piece;
+
+    if (rank_difference == 0) { // is moving horizontal
+        if (file_difference >= 1) {
+            is_move_legal = 1;
+            
+            for (count = 1; count < file_difference; count++) {
+                piece = game->board[start_file + count][start_rank];
+
+                if (!is_empty_square(piece)) {
+                    is_move_legal = 0;
+                }
+            }
+        } else if (file_difference <= -1) {
+            is_move_legal = 1;
+
+            for (count = -1; count > file_difference; count--) {
+                piece = game->board[start_file + count][start_rank];
+
+                if (!is_empty_square(piece)) {
+                    is_move_legal = 0;
+                }
+            }
+        }
+    } else if (file_difference == 0) { // is moving vertical
+        if (rank_difference >= 1) {
+            is_move_legal = 1;
+
+            for (count = 1; count < rank_difference; count++) {
+                piece = game->board[start_file][start_rank + count];
+
+                if (!is_empty_square(piece)) {
+                    is_move_legal = 0;
+                }
+            }
+        } else if (rank_difference <= -1) {
+            is_move_legal = 1;
+
+            for (count = -1; count > rank_difference; count--) {
+                piece = game->board[start_file][start_rank + count];
+
+                if (!is_empty_square(piece)) {
+                    is_move_legal = 0;
+                }
+            }
+        }
+    }
+
+    return is_move_legal;
 }
 
 int Piece_is_nabu_move_legal(Piece *self, Game *game)
