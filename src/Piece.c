@@ -150,7 +150,10 @@ int Piece_is_gisgigir_move_legal(Piece *self, Game *game)
 
 int Piece_is_nabu_move_legal(Piece *self, Game *game)
 {
-    return 0;
+    int file_difference = game->finish_square[0] - game->start_square[0];
+    int rank_difference = game->finish_square[1] - game->start_square[1];
+
+    return abs(file_difference) == 1 && abs(rank_difference) == 1;
 }
 
 int Piece_is_marzaz_pani_move_legal(Piece *self, Game *game)
