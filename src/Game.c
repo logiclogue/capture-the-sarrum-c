@@ -31,6 +31,15 @@ int Game_make_move(Game *game)
     return is_move;
 }
 
+void Game_print_whose_turn(Game *game)
+{
+    if (game->whose_turn == 'W') {
+        printf("It is White's turn\n");
+    } else {
+        printf("It is Black's turn\n");
+    }
+}
+
 
 static int is_legal_move(Game *game)
 {
