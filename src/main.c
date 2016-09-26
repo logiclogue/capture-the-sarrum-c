@@ -13,11 +13,11 @@ int main(void)
     
     if (dialog_sample_game()) {
         game_type_sample(game);
-        Board_draw(game->board);
     } else {
         game_type_normal(game);
-        Board_draw(game->board);
     }
+
+    Board_draw(game->board);
 
     while (1) {
         Game_print_whose_turn(game);
