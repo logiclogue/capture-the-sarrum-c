@@ -67,7 +67,7 @@ static char *draw_line(void)
 {
     char *line = allocate_line();
 
-    sprintf(line, "%s", "   ");
+    sprintf(line, "%s", "    ");
 
     for (int i = 0; i < BOARD_SIZE; i++) {
         sprintf(line, "%s___", line);
@@ -82,7 +82,7 @@ static void draw_pieces(Board self, int rank)
 {
     char *line = allocate_line();
 
-    sprintf(line, "%d  ", rank + 1);
+    sprintf(line, "%d   ", rank + 1);
 
     for (int i = 0; i < BOARD_SIZE; i++) {
         Piece *piece = self[i][rank];
