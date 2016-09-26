@@ -40,6 +40,15 @@ void Game_print_whose_turn(Game *game)
     }
 }
 
+void Game_switch_turn(Game *game)
+{
+    if (game->whose_turn == 'W') {
+        game->whose_turn = 'B';
+    } else {
+        game->whose_turn = 'W';
+    }
+}
+
 
 static int is_legal_move(Game *game)
 {

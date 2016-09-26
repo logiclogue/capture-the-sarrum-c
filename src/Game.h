@@ -21,5 +21,6 @@ typedef struct GameTag {
 Game *Game_main(void);
 int Game_make_move(Game *);
 void Game_print_whose_turn(Game *);
+void Game_switch_turn(Game *);
 
 #endif

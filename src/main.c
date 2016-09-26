@@ -19,13 +19,19 @@ int main(void)
         Board_draw(game->board);
     }
 
-    Game_print_whose_turn(game);
+    while (1) {
+        Game_print_whose_turn(game);
 
-    game->start_square = dialog_get_piece_coords();
-    game->finish_square = dialog_get_move_coords();
+        game->start_square = dialog_get_piece_coords();
+        game->finish_square = dialog_get_move_coords();
 
-    Game_make_move(game);
-    Board_draw(game->board);
+        Game_make_move(game);
+        Board_draw(game->board);
+
+        if (Game_make_move(game)) {
+            Game_switch_turn(game);
+        }
+    }
 
     return 0;
 }
