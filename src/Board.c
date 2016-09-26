@@ -36,6 +36,8 @@ void Board_draw(Board self)
     char *line = draw_line();
     char *header = draw_header();
 
+    printf("\n");
+
     for (int i = 0; i < BOARD_SIZE; i++) {
         printf("%s", line);
         draw_pieces(self, i);

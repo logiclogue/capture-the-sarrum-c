@@ -9,6 +9,7 @@
 int main(void)
 {
     Game *game = Game_main();
+    game->whose_turn = 'W';
     
     if (dialog_sample_game()) {
         game_type_sample(game);
@@ -18,7 +19,8 @@ int main(void)
         Board_draw(game->board);
     }
 
-    game->whose_turn = 'B';
+    Game_print_whose_turn(game);
+
     game->start_square = dialog_get_piece_coords();
     game->finish_square = dialog_get_move_coords();
 
