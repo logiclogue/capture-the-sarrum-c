@@ -3,6 +3,7 @@
 #include "Game.h"
 #include "Piece.h"
 #include "Board.h"
+#include "dialog.h"
 
 
 static int is_off(int);
@@ -16,8 +17,23 @@ Game *Game_main(void)
     Board board = Board_main();
 
     self->board = board;
+    self->game_over = 0;
+    self->whose_turn = 'W';
 
     return self;
+}
+
+void Game_query_move(Game *game)
+{
+    Game_collect_move(game);
+
+    while (!Game_make_move(game)) {
+        printf("That is not a legal move - please try again\n");
+
+        Game_collect_move(game);
+    }
+
+    Game_switch_turn(game);
 }
 
 int Game_make_move(Game *game)
@@ -29,6 +45,12 @@ int Game_make_move(Game *game)
     }
 
     return is_move;
+}
+
+void Game_collect_move(Game *game)
+{
+    game->start_square = dialog_get_piece_coords();
+    game->finish_square = dialog_get_move_coords();
 }
 
 void Game_print_whose_turn(Game *game)
