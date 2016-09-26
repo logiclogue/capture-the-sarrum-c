@@ -87,7 +87,7 @@ static void draw_pieces(Board self, int rank)
     for (int i = 0; i < BOARD_SIZE; i++) {
         Piece *piece = self[i][rank];
 
-        sprintf(line, "%s|%c%c", line, piece->type, piece->colour);
+        sprintf(line, "%s|%c%c", line, piece->colour, piece->type);
     }
 
     printf("%s|\n", line);
