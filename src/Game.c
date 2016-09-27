@@ -7,8 +7,10 @@
 
 
 static int is_off(int);
+static int is_sarrum_captured(Game *);
 static void make_move(Game *);
 static int is_legal_move(Game *);
+static void display_winner(Game *);
 
 
 Game *Game_main(void)
@@ -39,9 +41,16 @@ void Game_query_move(Game *game)
 int Game_make_move(Game *game)
 {
     int is_move = is_legal_move(game);
+    int is_captured = is_sarrum_captured(game);
 
     if (is_move) {
         make_move(game);
+    }
+
+    if (is_move && is_captured) {
+        game->game_over = 1;
+
+        display_winner(game);
     }
 
     return is_move;
@@ -71,6 +80,24 @@ void Game_switch_turn(Game *game)
     }
 }
 
+
+static void display_winner(Game *game)
+{
+    if (game->whose_turn == 'W') {
+        printf("Black's Sarrum has been captured.  White wins!\n\n");
+    } else {
+        printf("White's Sarrum has been captured.  Black wins!\n\n");
+    }
+}
+
+static int is_sarrum_captured(Game *game)
+{
+    int file = game->finish_square[0];
+    int rank = game->finish_square[1];
+    Piece *piece = game->board[file][rank];
+
+    return piece->type == 'S';
+}
 
 static int is_legal_move(Game *game)
 {
