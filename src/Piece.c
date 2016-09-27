@@ -49,6 +49,7 @@ int Piece_is_redum_move_legal(Piece *self, Game *game)
     int start_rank = game->start_square[1];
     int finish_file = game->finish_square[0];
     int finish_rank = game->finish_square[1];
+    int final_rank = 7;
     int forward_square = 1;
     int does_move_sideways = abs(finish_file - start_file) == 1;
     int does_move_forward;
@@ -57,9 +58,11 @@ int Piece_is_redum_move_legal(Piece *self, Game *game)
     Piece *capture_piece = game->board[finish_file][finish_rank];
     int is_empty_capture_piece = is_empty_square(capture_piece);
     int is_capture_piece_opponent;
+    int is_move_legal;
 
     if (colour == 'W') {
         forward_square = -1;
+        final_rank = 0;
         opponent_colour = 'B';
     } else {
         opponent_colour = 'W';
@@ -69,8 +72,18 @@ int Piece_is_redum_move_legal(Piece *self, Game *game)
     is_capture_piece_opponent = capture_piece->colour == opponent_colour;
     does_move_diagonal = does_move_forward && does_move_sideways;
 
-    return (does_move_forward && is_same_file && is_empty_capture_piece) ||
-           (does_move_diagonal && is_capture_piece_opponent);
+    is_move_legal = (does_move_forward && is_same_file &&
+                     is_empty_capture_piece) || (does_move_diagonal &&
+                     is_capture_piece_opponent);
+    
+    // If move is legal and on final rank, turn into a Marzaz Pani
+    if (is_move_legal && finish_rank == final_rank) {
+        free(self);
+
+        game->board[start_file][start_rank] = Piece_main('M', colour);
+    }
+
+    return is_move_legal;
 }
 
 int Piece_is_sarrum_move_legal(Piece *self, Game *game)
