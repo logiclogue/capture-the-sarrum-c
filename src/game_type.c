@@ -7,8 +7,9 @@
 void game_type_normal(Game *game)
 {
     Board board = game->board;
+    int i;
     
-    for (int i = 0; i < BOARD_SIZE; i++) {
+    for (i = 0; i < BOARD_SIZE; i++) {
         board[i][1] = Piece_main('R', 'B');
         board[i][6] = Piece_main('R', 'W');
     }
