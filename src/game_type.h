@@ -1,8 +1,6 @@
 #ifndef _GAME_TYPE_H_
 #define _GAME_TYPE_H_
 
-#include "Game.h"
-
 typedef struct GameTag Game;
 
 

@@ -3,8 +3,6 @@
 #define BOARD_SIZE 8
 #define BOARD_LINE_SIZE 6 + (3 * BOARD_SIZE)
 
-#include "Piece.h"
-
 
 typedef struct PieceTag Piece;
 
