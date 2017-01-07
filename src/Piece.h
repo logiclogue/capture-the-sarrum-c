@@ -1,4 +1,3 @@
-typedef struct GameTag Game;
 #ifndef _PIECE_H_
 #define _PIECE_H_
 
@@ -6,11 +5,11 @@ typedef struct GameTag Game;
 typedef struct PieceTag Piece;
 typedef struct GameTag Game;
 
-typedef struct PieceTag {
+struct PieceTag {
     char type;
     char colour;
     int (*is_move_legal)(Piece *, Game *);
-} Piece;
+};
 
 
 Piece *Piece_main(char, char);
