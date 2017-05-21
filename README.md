@@ -113,18 +113,6 @@ Not known how this piece was used in the game.
 It was revealed in the exam how this piece moved. Then it was up to the
 candidates to program in the Kashshaptu piece.
 
-## Installation
-
-Requires `gcc` and `make`.
-
-Type in the following commands:
-```
-git clone https://github.com/logiclogue/capture-the-sarrum-c.git
-cd capture-the-sarrum-c
-make
-./build/main
-```
-
 ## Author
 
 The original was created by the AQA COMP1 Programmer Team.
